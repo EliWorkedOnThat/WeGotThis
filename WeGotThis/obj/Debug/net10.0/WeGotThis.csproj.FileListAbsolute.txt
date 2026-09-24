@@ -21,7 +21,6 @@ C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\rjsmcshtml.dswa.cach
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\scopedcss\bundle\WeGotThis.styles.css
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\scopedcss\projectbundle\WeGotThis.bundle.scp.css
-C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\compressed\ii5qk38h2o-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\compressed\6559j00x80-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\compressed\bdyx3nr9h2-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\compressed\tdvnfc44d6-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -95,3 +94,4 @@ C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\refint\WeGotThis.dll
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\WeGotThis.pdb
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\WeGotThis.genruntimeconfig.cache
 C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\ref\WeGotThis.dll
+C:\Users\mezin\Desktop\Learn C#\WeGotThis\obj\Debug\net10.0\compressed\ii5qk38h2o-{0}-vzgq6usy4p-vzgq6usy4p.gz

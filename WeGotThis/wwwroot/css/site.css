@@ -1,3 +1,10 @@
+:root {
+  --page-bg: #f5f0e1;
+  --page-text: #1c1c1a;
+  --bar-bg: #e8e1cc;
+  --bar-border: #cfc6ab;
+}
+
 html {
   font-size: 14px;
 }
@@ -19,6 +26,8 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: var(--page-bg);
+  color: var(--page-text);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +37,63 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+.navbar,
+.footer {
+  background-color: var(--bar-bg) !important;
+  border-color: var(--bar-border) !important;
+}
+
+main:has(.signup-card) {
+  min-height: calc(100vh - 9rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 0;
+  padding: 2rem;
+  border: 2px solid var(--bar-border);
+  border-radius: 16px;
+  background-color: var(--bar-bg);
+}
+
+.signup-card h1 {
+  text-align: center;
+}
+
+.signup-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.signup-card input {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--bar-border);
+  border-radius: 999px;
+  background-color: var(--page-bg);
+  color: var(--page-text);
+}
+
+.signup-card button {
+  margin-top: 1rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--page-text);
+  color: var(--page-bg);
+  cursor: pointer;
+
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.signup-card button:hover{
+  background-color: white;
+  color: black;
+  transform: translateY(-3px);
 }
