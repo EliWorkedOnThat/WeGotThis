@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WeGotThis.Data;
 using WeGotThis.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WeGotThis.Pages;
 
@@ -30,8 +31,22 @@ public class SignUpModel : PageModel
     {
     }
 
-    public IActionResult  OnPost()
+    public IActionResult OnPost()
     {
+        var existingMember = _context.Members.FirstOrDefault(m => m.Username == Username);
+
+        if (existingMember != null)
+        {
+            ModelState.AddModelError("Username", "That username is already taken.");
+            return Page();
+        }
+
+        if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(Goal))
+        {
+            ModelState.AddModelError(string.Empty, "None of the fields can be empty.");
+            return Page();
+        }
+
         var member = new Member
         {
             Username = Username,
@@ -41,7 +56,7 @@ public class SignUpModel : PageModel
 
         member.Goal = new Goal
         {
-          Goals = Goal  
+            Goals = Goal
         };
 
         _context.Members.Add(member);
