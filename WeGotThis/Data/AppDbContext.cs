@@ -10,6 +10,8 @@ public class AppDbContext : DbContext
     {
     }
 
+    public DbSet<Pool> Pool => Set<Pool>();
+
     public DbSet<Member> Members => Set<Member>();
     public DbSet<Goal> Goals => Set<Goal>();
 }

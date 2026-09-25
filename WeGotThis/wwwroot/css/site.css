@@ -80,6 +80,11 @@ main:has(.signup-card) {
   color: var(--page-text);
 }
 
+#Goal {
+  padding: 0.9rem 1rem;
+  border: 2px solid var(--page-text);
+}
+
 .signup-card button {
   margin-top: 1rem;
   padding: 0.6rem;
@@ -96,4 +101,9 @@ main:has(.signup-card) {
   background-color: white;
   color: black;
   transform: translateY(-3px);
+}
+
+.total-goal-counter {
+  text-align: center;
+  margin-top: 2rem;
 }

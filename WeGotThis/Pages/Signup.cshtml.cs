@@ -60,6 +60,8 @@ public class SignUpModel : PageModel
         };
 
         _context.Members.Add(member);
+        var pool = _context.Pool.Single();
+        pool.TotalGoals++;
         _context.SaveChanges();
 
         return RedirectToPage("Index");
