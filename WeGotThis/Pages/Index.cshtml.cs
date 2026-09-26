@@ -16,12 +16,18 @@ public class IndexModel : PageModel
         _context = context;
     }
 
-    public List<Member> Members { get; set; } = new();
+    public List<Goal> RandomGoals { get; set; } = new();
     public int TotalGoals { get; set; }
 
     public void OnGet()
     {
-        Members = _context.Members.Include(m => m.Goal).ToList();
+        RandomGoals = _context.Goals
+            .Include(g => g.Member)
+            .ToList()
+            .OrderBy(g => Guid.NewGuid())
+            .Take(5)
+            .ToList();
+
         TotalGoals = _context.Goals.Count();
     }
 }

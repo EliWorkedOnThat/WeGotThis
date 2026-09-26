@@ -4,19 +4,27 @@
     ViewData["Title"] = "Home page";
 }
 
+@if (User.Identity?.IsAuthenticated == true){
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome @User.Identity.Name</h1>
 </div>
+}
+else
+{
+    <h1 class="display-4">Welcome </h1>
+}
 
 <div class="total-goal-counter">
     <h1>Goal Pool Currently: <span id="goalCounter" data-target="@Model.TotalGoals">0</span></h1>
 </div>
 
-@if (User.Identity?.IsAuthenticated == true)
-{
-    <p>Logged in as @User.Identity.Name</p>
-}
-else
-{
-    <p>Not logged in.</p>
-}
+<div class="goal-list">
+    <h2>Your Goal List for Today:</h2>
+
+    @foreach (var goal in Model.RandomGoals)
+    {
+        <div class="goal-item">
+            <strong>@goal.Member?.Username</strong>: @goal.Goals
+        </div>
+    }
+</div>
