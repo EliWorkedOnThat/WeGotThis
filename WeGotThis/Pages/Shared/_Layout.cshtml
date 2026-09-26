@@ -41,7 +41,9 @@
                                 <span class="nav-link text-dark">Hi, @User.Identity.Name</span>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Logout">Log out</a>
+                            <form method="post" asp-page="/Logout" style="display:inline;">
+                                <button type="submit" class="nav-link text-dark btn btn-link border-0">Log out</button>
+                            </form>
                             </li>
                         }
                     </ul>

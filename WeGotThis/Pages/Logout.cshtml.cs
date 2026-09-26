@@ -7,7 +7,7 @@ namespace WeGotThis.Pages;
 
 public class LogoutModel : PageModel
 {
-    public async Task<IActionResult> OnGet()
+    public async Task<IActionResult> OnPost()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToPage("Index");
