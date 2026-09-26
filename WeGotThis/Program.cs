@@ -14,7 +14,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Signup";
        options.ExpireTimeSpan = TimeSpan.FromHours(1);
-        options.SlidingExpiration = false;
+        options.SlidingExpiration = true;
     });
 
 builder.Services.AddRazorPages();

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using WeGotThis.Data;
@@ -6,6 +6,7 @@ using WeGotThis.Models;
 
 namespace WeGotThis.Pages;
 
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly AppDbContext _context;
