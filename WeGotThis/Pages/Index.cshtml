@@ -11,3 +11,12 @@
 <div class="total-goal-counter">
     <h1>Goal Pool Currently: <span id="goalCounter" data-target="@Model.TotalGoals">0</span></h1>
 </div>
+
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <p>Logged in as @User.Identity.Name</p>
+}
+else
+{
+    <p>Not logged in.</p>
+}

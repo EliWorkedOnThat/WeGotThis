@@ -4,6 +4,9 @@ using WeGotThis.Data;
 using WeGotThis.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WeGotThis.Pages;
 
@@ -31,7 +34,7 @@ public class SignUpModel : PageModel
     {
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPost()
     {
         var existingMember = _context.Members.FirstOrDefault(m => m.Username == Username);
 
@@ -63,6 +66,16 @@ public class SignUpModel : PageModel
         var pool = _context.Pool.Single();
         pool.TotalGoals++;
         _context.SaveChanges();
+
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, member.Username),
+            new Claim("MemberId", member.Id.ToString())
+        };
+
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
         return RedirectToPage("Index");
     }
