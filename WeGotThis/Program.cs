@@ -12,7 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Signup";
+        options.LoginPath = "/Login";
        options.ExpireTimeSpan = TimeSpan.FromHours(1);
         options.SlidingExpiration = true;
     });
