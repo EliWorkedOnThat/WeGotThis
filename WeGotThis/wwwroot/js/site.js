@@ -1,4 +1,11 @@
-﻿function animateCounter(element, duration) {
+﻿function setTimezoneCookie() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.cookie = `timezone=${timezone}; path=/; max-age=${60 * 60 * 24 * 365}`;
+}
+
+setTimezoneCookie();
+
+function animateCounter(element, duration) {
     const target = parseInt(element.dataset.target, 10);
     const startTime = performance.now();
 
