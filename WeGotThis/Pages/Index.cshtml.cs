@@ -26,46 +26,33 @@ public class IndexModel : PageModel
     public HashSet<int> RejectedByMeIds { get; set; } = new();
 
     public void OnGet()
-    {
-        var timezoneId = Request.Cookies["timezone"] ?? "UTC";
+{
+    var today = DateTime.UtcNow.Date;
 
-        TimeZoneInfo timezone;
-        try
-        {
-            timezone = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
-        }
-        catch (TimeZoneNotFoundException)
-        {
-            timezone = TimeZoneInfo.Utc;
-        }
+    var seed = today.Year * 10000 + today.Month * 100 + today.Day;
+    var random = new Random(seed);
 
-        var localNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, timezone);
-        var today = localNow.Date;
+    RandomGoals = _context.Goals
+        .Include(g => g.Member)
+        .ToList()
+        .OrderBy(g => random.Next())
+        .Take(5)
+        .ToList();
 
-        var seed = today.Year * 10000 + today.Month * 100 + today.Day;
-        var random = new Random(seed);
+    TotalGoals = _context.Goals.Count();
+    CompletedGoals = _context.GoalActions.Count(a => a.IsCompleted);
+    RejectedGoals = _context.GoalActions.Count(a => a.IsRejected);
 
-        RandomGoals = _context.Goals
-            .Include(g => g.Member)
-            .ToList()
-            .OrderBy(g => random.Next())
-            .Take(5)
-            .ToList();
+    var memberId = GetCurrentMemberId();
+    var since = DateTime.UtcNow.AddHours(-24);
 
-        TotalGoals = _context.Goals.Count();
-        CompletedGoals = _context.GoalActions.Count(a => a.IsCompleted);
-        RejectedGoals = _context.GoalActions.Count(a => a.IsRejected);
+    var myRecentActions = _context.GoalActions
+        .Where(a => a.MemberId == memberId && a.ActedAt >= since)
+        .ToList();
 
-        var memberId = GetCurrentMemberId();
-        var since = DateTime.UtcNow.AddHours(-24);
-
-        var myRecentActions = _context.GoalActions
-            .Where(a => a.MemberId == memberId && a.ActedAt >= since)
-            .ToList();
-
-        CompletedByMeIds = myRecentActions.Where(a => a.IsCompleted).Select(a => a.GoalId).ToHashSet();
-        RejectedByMeIds = myRecentActions.Where(a => a.IsRejected).Select(a => a.GoalId).ToHashSet();
-    }
+    CompletedByMeIds = myRecentActions.Where(a => a.IsCompleted).Select(a => a.GoalId).ToHashSet();
+    RejectedByMeIds = myRecentActions.Where(a => a.IsRejected).Select(a => a.GoalId).ToHashSet();
+}
 
     public IActionResult OnPostComplete(int id)
     {
