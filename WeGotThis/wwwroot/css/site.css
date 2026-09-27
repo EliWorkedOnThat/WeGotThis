@@ -130,3 +130,13 @@ main:has(.signup-card) {
 .goal-item strong {
   color: var(--page-text);
 }
+
+.count-completed {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.count-rejected {
+  color: #c62828;
+  font-weight: 600;
+}

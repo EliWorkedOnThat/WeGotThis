@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using WeGotThis.Data;
@@ -21,6 +22,32 @@ public class IndexModel : PageModel
 
 public int CompletedGoals { get; set; }
 public int RejectedGoals { get; set; }
+
+public IActionResult OnPostComplete(int id)
+{
+    var goal = _context.Goals.Find(id);
+
+    if (goal != null)
+    {
+        goal.IsCompleted = true;
+        _context.SaveChanges();
+    }
+
+    return RedirectToPage();
+}
+
+public IActionResult OnPostReject(int id)
+{
+    var goal = _context.Goals.Find(id);
+
+    if (goal != null)
+    {
+        goal.IsRejected = true;
+        _context.SaveChanges();
+    }
+
+    return RedirectToPage();
+}
 
 public void OnGet()
 {

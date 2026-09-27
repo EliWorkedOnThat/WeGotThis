@@ -16,11 +16,7 @@ else
 
 <div class="total-goal-counter">
     <h1>Goal Pool Currently: <span id="goalCounter" data-target="@Model.TotalGoals">0</span></h1>
-</div>
-
-<div class="total-goal-counter">
-    <h1>Goal Pool Currently: <span id="goalCounter" data-target="@Model.TotalGoals">0</span></h1>
-    <p>Completed: @Model.CompletedGoals &nbsp;|&nbsp; Rejected: @Model.RejectedGoals</p>
+    <p>Completed: <span class="count-completed">@Model.CompletedGoals</span> &nbsp;|&nbsp; Rejected: <span class="count-rejected">@Model.RejectedGoals</span></p>
 </div>
 
 <div class="goal-list">
@@ -30,6 +26,14 @@ else
     {
         <div class="goal-item">
             <strong>@goal.Member?.Username</strong>: @goal.Goals
+
+            <form method="post" asp-page-handler="Complete" asp-route-id="@goal.Id" style="display:inline;">
+                <button type="submit">Complete</button>
+            </form>
+
+            <form method="post" asp-page-handler="Reject" asp-route-id="@goal.Id" style="display:inline;">
+                <button type="submit">Reject</button>
+            </form>
         </div>
     }
 
