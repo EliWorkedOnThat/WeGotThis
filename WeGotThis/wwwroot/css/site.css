@@ -140,3 +140,28 @@ main:has(.signup-card) {
   color: #c62828;
   font-weight: 600;
 }
+
+.goal-item form {
+  margin: 0 0 0 1rem;
+}
+
+.goal-item form button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.goal-item form:nth-of-type(1) button {
+  color: #2e7d32;
+}
+
+.goal-item form:nth-of-type(2) button {
+  color: #c62828;
+}
+
+.goal-item form button:hover {
+  text-decoration: underline;
+}
