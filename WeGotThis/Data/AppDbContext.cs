@@ -14,4 +14,6 @@ public class AppDbContext : DbContext
 
     public DbSet<Member> Members => Set<Member>();
     public DbSet<Goal> Goals => Set<Goal>();
+
+    public DbSet<GoalAction> GoalActions => Set<GoalAction>();
 }

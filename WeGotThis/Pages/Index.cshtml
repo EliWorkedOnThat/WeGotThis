@@ -24,7 +24,7 @@ else
 
     @foreach (var goal in Model.RandomGoals)
     {
-        <div class="goal-item">
+       <div class="goal-item @(Model.CompletedByMeIds.Contains(goal.Id) ? "goal-completed" : Model.RejectedByMeIds.Contains(goal.Id) ? "goal-rejected" : "")">
             <strong>@goal.Member?.Username</strong>: @goal.Goals
 
             <form method="post" asp-page-handler="Complete" asp-route-id="@goal.Id" style="display:inline;">

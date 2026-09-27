@@ -165,3 +165,13 @@ main:has(.signup-card) {
 .goal-item form button:hover {
   text-decoration: underline;
 }
+
+.goal-item.goal-completed {
+  background-color: #c8e6c9;
+  border-color: #2e7d32;
+}
+
+.goal-item.goal-rejected {
+  background-color: #ffcdd2;
+  border-color: #c62828;
+}
