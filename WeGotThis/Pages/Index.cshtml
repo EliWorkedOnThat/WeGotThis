@@ -18,6 +18,11 @@ else
     <h1>Goal Pool Currently: <span id="goalCounter" data-target="@Model.TotalGoals">0</span></h1>
 </div>
 
+<div class="total-goal-counter">
+    <h1>Goal Pool Currently: <span id="goalCounter" data-target="@Model.TotalGoals">0</span></h1>
+    <p>Completed: @Model.CompletedGoals &nbsp;|&nbsp; Rejected: @Model.RejectedGoals</p>
+</div>
+
 <div class="goal-list">
     <h2>Your Goal List for Today:</h2>
 
@@ -27,4 +32,5 @@ else
             <strong>@goal.Member?.Username</strong>: @goal.Goals
         </div>
     }
+
 </div>

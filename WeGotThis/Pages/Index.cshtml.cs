@@ -19,7 +19,10 @@ public class IndexModel : PageModel
     public List<Goal> RandomGoals { get; set; } = new();
     public int TotalGoals { get; set; }
 
-   public void OnGet()
+public int CompletedGoals { get; set; }
+public int RejectedGoals { get; set; }
+
+public void OnGet()
 {
     var timezoneId = Request.Cookies["timezone"] ?? "UTC";
 
@@ -47,5 +50,7 @@ public class IndexModel : PageModel
         .ToList();
 
     TotalGoals = _context.Goals.Count();
+    CompletedGoals = _context.Goals.Count(g => g.IsCompleted);
+    RejectedGoals = _context.Goals.Count(g => g.IsRejected);
 }
 }
