@@ -47,6 +47,17 @@ public class SignUpModel : PageModel
             return Page();
         }
 
+        if (Password.Length < 8)
+        {
+            ModelState.AddModelError("Password" , "Password cannot be shorter than 8 characters");
+            return Page();
+        }
+        else if (!Password.Any(char.IsDigit))
+        {
+            ModelState.AddModelError("Password" , "Password must contain atleast one number");
+            return Page();
+        }
+
        var ip = GetClientIp();
 
         if (ip != "unknown" && _context.Members.Any(m => m.SignupIp == ip))
