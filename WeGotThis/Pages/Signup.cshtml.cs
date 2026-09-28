@@ -1,9 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using WeGotThis.Data;
 using WeGotThis.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace WeGotThis.Pages;
 
@@ -47,14 +47,23 @@ public class SignUpModel : PageModel
             return Page();
         }
 
+       var ip = GetClientIp();
+
+        if (ip != "unknown" && _context.Members.Any(m => m.SignupIp == ip))
+        {
+            ModelState.AddModelError(string.Empty, "An account has already been created from this network.");
+            return Page();
+        }
+
         var member = new Member
         {
             Username = Username,
+            SignupIp = ip
         };
 
         member.PasswordHash = _hasher.HashPassword(member, Password);
 
-        member.Goals.Add (new Goal
+        member.Goals.Add(new Goal
         {
             Goals = Goal
         });
@@ -65,5 +74,10 @@ public class SignUpModel : PageModel
         _context.SaveChanges();
 
         return RedirectToPage("Login");
+    }
+
+    private string GetClientIp()
+    {
+        return HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
     }
 }
