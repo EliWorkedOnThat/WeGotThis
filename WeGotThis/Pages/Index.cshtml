@@ -21,11 +21,22 @@ else
 </div>
 
 <div class="new-goal">
-    <p>Tokens: @Model.Tokens</p>
 
-    <form method="post" asp-page-handler="SubmitGoal">
-        <input type="text" name="goalText" placeholder="Your new goal" required />
-        <button type="submit" disabled="@(Model.Tokens < 1)">+ Goal</button>
+    <div class="token-display">
+        <span class="token-label">Tokens</span>
+        <span class="token-count">@Model.Tokens</span>
+    </div>
+
+    <form method="post" asp-page-handler="SubmitGoal" class="goal-form">
+        <input 
+            type="text" 
+            name="goalText" 
+            placeholder="What do you want to accomplish?" 
+            required />
+
+        <button type="submit" disabled="@(Model.Tokens < 1)">
+            + Goal
+        </button>
     </form>
 </div>
 
