@@ -19,12 +19,21 @@ else
     <p>Completed: <span class="count-completed">@Model.CompletedGoals</span> &nbsp;|&nbsp; Rejected: <span class="count-rejected">@Model.RejectedGoals</span></p>
 </div>
 
+<div class="new-goal">
+    <p>Tokens: @Model.Tokens</p>
+
+    <form method="post" asp-page-handler="SubmitGoal">
+        <input type="text" name="goalText" placeholder="Your new goal" required />
+        <button type="submit" disabled="@(Model.Tokens < 1)">+ Goal</button>
+    </form>
+</div>
+
 <div class="goal-list">
     <h2>Your Goal List for Today:</h2>
 
     @foreach (var goal in Model.RandomGoals)
     {
-       <div class="goal-item @(Model.CompletedByMeIds.Contains(goal.Id) ? "goal-completed" : Model.RejectedByMeIds.Contains(goal.Id) ? "goal-rejected" : "")">
+        <div class="goal-item @(Model.CompletedByMeIds.Contains(goal.Id) ? "goal-completed" : Model.RejectedByMeIds.Contains(goal.Id) ? "goal-rejected" : "")">
             <strong>@goal.Member?.Username</strong>: @goal.Goals
 
             <form method="post" asp-page-handler="Complete" asp-route-id="@goal.Id" style="display:inline;">

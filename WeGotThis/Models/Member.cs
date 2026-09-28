@@ -5,6 +5,8 @@ public class Member
     public int Id { get; set; }
     public string Username { get; set; } = "";
     public string PasswordHash { get; set; } = "";
+    
+    public int Tokens { get; set; } = 1;
 
-    public Goal? Goal {get; set;}
+    public List<Goal> Goals { get; set; } = new();
 }

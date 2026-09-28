@@ -54,10 +54,10 @@ public class SignUpModel : PageModel
 
         member.PasswordHash = _hasher.HashPassword(member, Password);
 
-        member.Goal = new Goal
+        member.Goals.Add (new Goal
         {
             Goals = Goal
-        };
+        });
 
         _context.Members.Add(member);
         var pool = _context.Pool.Single();
