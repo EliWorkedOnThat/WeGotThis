@@ -41,7 +41,7 @@ body {
 
     color: var(--page-text);
 
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -139,6 +139,7 @@ main:has(.signup-card) {
   border-radius: 12px;
   padding: 1rem 1.5rem;
   margin-bottom: 0.75rem;
+  overflow-wrap: anywhere;
 }
 
 .goal-item strong {
@@ -316,6 +317,8 @@ main:has(.signup-card) {
   margin: 2rem auto 6rem;
   padding: 0 1rem;
   text-align: center;
+  font-weight: bold;
+  font-size: 22px;
 }
 
 html, body {

@@ -129,6 +129,12 @@ public IActionResult OnPostReject(int id)
 
         member.Tokens--;
 
+        goalText = goalText.Trim();
+        if (goalText.Length > 120)
+        {
+            return RedirectToPage();
+        }
+
         _context.Goals.Add(new Goal
         {
             Goals = goalText,
