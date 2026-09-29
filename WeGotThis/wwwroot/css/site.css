@@ -40,6 +40,8 @@ body {
         100% 100%;
 
     color: var(--page-text);
+
+    margin-bottom: 80px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -306,5 +308,17 @@ main:has(.signup-card) {
 
     .goal-form button {
         width: 100%;
-    }
+    }  
+}
+
+.daily-quote {
+  max-width: 700px;
+  margin: 2rem auto 6rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+html, body {
+  height: auto !important;
+  overflow-y: auto !important;
 }

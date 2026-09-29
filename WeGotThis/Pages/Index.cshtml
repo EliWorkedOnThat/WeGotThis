@@ -1,18 +1,18 @@
 ﻿@page
-@using Microsoft.VisualBasic
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-@if (User.Identity?.IsAuthenticated == true){
-<div class="text-center">
-    <h1 class="display-4">Welcome @User.Identity.Name</h1>
-</div>
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome @User.Identity.Name</h1>
+    </div>
 }
 else
 {
-    <h1 class="display-4">Welcome </h1>
+    <h1 class="display-4">Welcome</h1>
 }
 
 <div class="total-goal-counter">
@@ -28,10 +28,10 @@ else
     </div>
 
     <form method="post" asp-page-handler="SubmitGoal" class="goal-form">
-        <input 
-            type="text" 
-            name="goalText" 
-            placeholder="What do you want to accomplish?" 
+        <input
+            type="text"
+            name="goalText"
+            placeholder="What do you want to accomplish?"
             required />
 
         <button type="submit" disabled="@(Model.Tokens < 1)">
@@ -66,5 +66,12 @@ else
 
         </div>
     }
-
 </div>
+
+@if (Model.DailyQuote != null)
+{
+    <blockquote class="text-center my-4">
+        <p class="fst-italic">"@Model.DailyQuote.Text"</p>
+        <p class="text-muted">— @Model.DailyQuote.Author</p>
+    </blockquote>
+}

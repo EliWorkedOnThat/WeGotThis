@@ -22,6 +22,7 @@ public class IndexModel : PageModel
     public int CompletedGoals { get; set; }
     public int RejectedGoals { get; set; }
     public int Tokens { get; set; }
+    public Quote? DailyQuote { get; set; }
 
     public HashSet<int> CompletedByMeIds { get; set; } = new();
     public HashSet<int> RejectedByMeIds { get; set; } = new();
@@ -57,6 +58,17 @@ public class IndexModel : PageModel
         RejectedByMeIds = myRecentActions.Where(a => a.IsRejected).Select(a => a.GoalId).ToHashSet();
 
         Tokens = _context.Members.Find(memberId)?.Tokens ?? 0;
+
+        var quoteCount = _context.Quotes.Count();
+        if (quoteCount > 0)
+        {
+            var quoteIndex = new Random(seed + 1).Next(quoteCount);
+            DailyQuote = _context.Quotes
+                .OrderBy(q => q.Id)
+                .Skip(quoteIndex)
+                .FirstOrDefault();
+        }
+
     }
 
     public IActionResult OnPostComplete(int id)
