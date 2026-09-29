@@ -25,9 +25,21 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  background-color: var(--page-bg);
-  color: var(--page-text);
+    background-color: var(--page-bg);
+
+    background-image:
+        linear-gradient(rgba(28, 28, 26, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28, 28, 26, 0.025) 1px, transparent 1px),
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.7), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(232, 225, 204, 0.6), transparent 35%);
+
+    background-size:
+        32px 32px,
+        32px 32px,
+        100% 100%,
+        100% 100%;
+
+    color: var(--page-text);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -271,6 +283,14 @@ main:has(.signup-card) {
 .goal-form button:disabled {
     opacity: 0.35;
     cursor: not-allowed;
+}
+
+.different-style .nav-link {
+  transition: color 0.2s ease;
+}
+
+.different-style .nav-link:hover {
+  color: cyan !important;
 }
 
 @media (max-width: 600px) {
