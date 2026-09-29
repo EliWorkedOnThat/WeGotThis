@@ -70,8 +70,8 @@ else
 
 @if (Model.DailyQuote != null)
 {
-    <blockquote class="text-center my-4">
+    <div class="daily-quote">
         <p class="fst-italic">"@Model.DailyQuote.Text"</p>
         <p class="text-muted">— @Model.DailyQuote.Author</p>
-    </blockquote>
+    </div>
 }

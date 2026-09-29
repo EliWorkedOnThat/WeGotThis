@@ -59,15 +59,7 @@ public class IndexModel : PageModel
 
         Tokens = _context.Members.Find(memberId)?.Tokens ?? 0;
 
-        var quoteCount = _context.Quotes.Count();
-        if (quoteCount > 0)
-        {
-            var quoteIndex = new Random(seed + 1).Next(quoteCount);
-            DailyQuote = _context.Quotes
-                .OrderBy(q => q.Id)
-                .Skip(quoteIndex)
-                .FirstOrDefault();
-        }
+        DailyQuote = _context.Quotes.OrderBy(q => EF.Functions.Random()).FirstOrDefault();
 
     }
 
