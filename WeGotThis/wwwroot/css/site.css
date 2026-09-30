@@ -7,6 +7,8 @@
 
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -17,11 +19,6 @@ html {
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
 }
 
 body {
@@ -59,11 +56,33 @@ body {
   border-color: var(--bar-border) !important;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signup-card,
+  .login-message {
+    animation: none;
+  }
+}
+
 main:has(.signup-card) {
   min-height: calc(100vh - 9rem);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+main:has(.login-message) {
+  gap: 4rem;
 }
 
 .signup-card {
@@ -74,6 +93,10 @@ main:has(.signup-card) {
   border: 2px solid var(--bar-border);
   border-radius: 16px;
   background-color: var(--bar-bg);
+  box-shadow: 0 10px 30px rgba(28, 28, 26, 0.10);
+  animation: fadeInUp 0.7s ease-out both;
+  order: 1;
+  flex: 0 1 400px;
 }
 
 .signup-card h1 {
@@ -86,12 +109,26 @@ main:has(.signup-card) {
   gap: 0.5rem;
 }
 
+.signup-card label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 .signup-card input {
   padding: 0.6rem 1rem;
   border: 1px solid var(--bar-border);
   border-radius: 999px;
   background-color: var(--page-bg);
   color: var(--page-text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signup-card input:focus {
+  border-color: var(--page-text);
+  box-shadow: 0 0 0 3px rgba(28, 28, 26, 0.10);
 }
 
 #Goal {
@@ -100,6 +137,7 @@ main:has(.signup-card) {
 }
 
 .signup-card button {
+  width: 100%;
   margin-top: 1rem;
   padding: 0.6rem;
   border: none;
@@ -117,33 +155,45 @@ main:has(.signup-card) {
   transform: translateY(-3px);
 }
 
+.login-message {
+  order: 2;
+  flex: 1 1 0;
+  max-width: 420px;
+  padding-left: 1.5rem;
+  border-left: 4px solid var(--page-text);
+
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.4;
+  text-align: left;
+
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.login-message p {
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  main:has(.login-message) {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  .login-message {
+    max-width: 400px;
+    padding-left: 0;
+    border-left: none;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+}
+
 .total-goal-counter {
   text-align: center;
   margin-top: 2rem;
-}
-
-.goal-list {
-  max-width: 700px;
-  margin: 3rem auto 0;
-  padding: 0 1rem;
-}
-
-.goal-list h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.goal-item {
-  background-color: var(--bar-bg);
-  border: 1px solid var(--bar-border);
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 0.75rem;
-  overflow-wrap: anywhere;
-}
-
-.goal-item strong {
-  color: var(--page-text);
 }
 
 .count-completed {
@@ -154,47 +204,6 @@ main:has(.signup-card) {
 .count-rejected {
   color: #c62828;
   font-weight: 600;
-}
-
-.goal-item form {
-  margin: 0 0 0 1rem;
-}
-
-.goal-item form button {
-  background: none;
-  border: none;
-  padding: 0;
-  font-weight: 700;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.goal-item form:nth-of-type(1) button {
-  color: #2e7d32;
-}
-
-.goal-item form:nth-of-type(2) button {
-  color: #c62828;
-}
-
-.goal-item form button:hover {
-  text-decoration: underline;
-}
-
-.goal-item.goal-completed {
-  background-color: #c8e6c9;
-  border-color: #2e7d32;
-}
-
-.goal-item.goal-rejected {
-  background-color: #ffcdd2;
-  border-color: #c62828;
-}
-
-.goal-item form button:disabled,
-.goal-item form button:disabled:hover {
-    cursor: not-allowed;
-    opacity: 0.3;
 }
 
 .new-goal {
@@ -288,12 +297,78 @@ main:has(.signup-card) {
     cursor: not-allowed;
 }
 
-.different-style .nav-link {
+.goal-list {
+  max-width: 700px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
+}
+
+.goal-list h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.goal-item {
+  background-color: var(--bar-bg);
+  border: 1px solid var(--bar-border);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.goal-item strong {
+  color: var(--page-text);
+}
+
+.goal-item form {
+  margin: 0 0 0 1rem;
+}
+
+.goal-item form button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 700;
+  cursor: pointer;
   transition: color 0.2s ease;
 }
 
-.different-style .nav-link:hover {
-  color: cyan !important;
+.goal-item form:nth-of-type(1) button {
+  color: #2e7d32;
+}
+
+.goal-item form:nth-of-type(2) button {
+  color: #c62828;
+}
+
+.goal-item form button:hover {
+  text-decoration: underline;
+}
+
+.goal-item.goal-completed {
+  background-color: #c8e6c9;
+  border-color: #2e7d32;
+}
+
+.goal-item.goal-rejected {
+  background-color: #ffcdd2;
+  border-color: #c62828;
+}
+
+.goal-item form button:disabled,
+.goal-item form button:disabled:hover {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.daily-quote {
+  max-width: 700px;
+  margin: 2rem auto 6rem;
+  padding: 0 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
 }
 
 @media (max-width: 600px) {
@@ -309,16 +384,15 @@ main:has(.signup-card) {
 
     .goal-form button {
         width: 100%;
-    }  
+    }
 }
 
-.daily-quote {
-  max-width: 700px;
-  margin: 2rem auto 6rem;
-  padding: 0 1rem;
-  text-align: center;
-  font-weight: bold;
-  font-size: 22px;
+.different-style .nav-link {
+  transition: color 0.2s ease;
+}
+
+.different-style .nav-link:hover {
+  color: cyan !important;
 }
 
 html, body {
