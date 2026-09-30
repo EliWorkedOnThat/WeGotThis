@@ -395,6 +395,10 @@ main:has(.login-message) {
   color: cyan !important;
 }
 
+.policy-page {
+  padding-bottom: 4rem;
+}
+
 html, body {
   height: auto !important;
   overflow-y: auto !important;
